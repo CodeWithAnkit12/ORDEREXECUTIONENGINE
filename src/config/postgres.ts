@@ -1,9 +1,14 @@
 import { Pool } from 'pg';
 
 export const pgPool = new Pool({
-  host: 'localhost',
-  port: 5432,
+  host: '127.0.0.1',
+  port: 5433, // 🔥 IMPORTANT
   user: 'postgres',
-  password: 'postgres', // change if your password is different
-  database: 'orders_db'
+  password: 'postgres',
+  database: 'orders_db',
+  ssl: false
+});
+
+pgPool.on('connect', () => {
+  console.log('✅ Connected to Docker PostgreSQL (orders_db)');
 });
